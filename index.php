@@ -12,45 +12,33 @@ and open the template in the editor.
     <body>
         <?php
         class Game {
-            var $position;
-            
+            var $position;         
             function _construct($squares) {
                 $this->position = str_split($squares);
-            }
-            
-            function winner($token, $position) {
+            }         
+            function winner($token) {
                 for($row=0; $row<3; $row++) {
                     $result = true;
                     for($col=0;$col<3;$col++) {
-                        if($position[3*$row+$col] != $token) {
+                        if($this->position[3*$row+$col] != $token) {
                             $result = false;
                         }
                     }
                 }
                 return $result;
-
-            }
-            $game = new Game($squares);
-            if($game->winner('x')) {
-                echo 'You win. Lucky guesses!';
-            } else if ($game->winner('o')) {
-                echo 'I win. Muahahaha';
-            } else {
-                echo 'No winner yet.';
-            }
-                    
-        
+            }         
             function display() {
                 echo '<table cols="3" style="font-size:large; font-weight: bold">';
                 echo '<tr>'; // open the first row
                 for($pos=0; $pos<9;$pos++) {
                     echo $this->show_cell($pos);
-                    if($pos %3 ==2) echo '</tr><tr>';
+                    if($pos %3 ==2) {
+                        echo '</tr><tr>';
+                    }
                 }
                 echo '</tr>';
                 echo '</table>';
             }
-
             function show_cell($which) {
                 $token = $this->position[$which];
                 //deal with the easy case
@@ -64,17 +52,15 @@ and open the template in the editor.
                 return '<td><a href="'.$link.'">-</a></td>';
             }
         }
-//        function qwer($token, $position) {
-//            $won = false;
-//            if(($position[0] == $token) && ($position[1] == $token) && ($position[2] == $token)) {
-//                $won = true;
-//            } else if (($position[3] == $token) && ($position[4] == $token) && ($position[5] == $token)) {
-//                $won = true;
-//            }
-//            return $won;
-//        }
-
-        
+        $game = new Game($squares);
+        $game->display();
+        if($game->winner('x')) {
+            echo 'You win. Lucky guesses!';
+        } else if ($game->winner('o')) {
+            echo 'I win. Muahahaha';
+        } else {
+            echo 'No winner yet.';
+        }
         ?>
     </body>
 </html>
