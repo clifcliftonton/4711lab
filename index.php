@@ -12,7 +12,8 @@ and open the template in the editor.
     <body>
         <?php
         class Game {
-            var $position;         
+            var $position;      
+            var $newposition;
             function _construct($squares) {
                 $this->position = str_split($squares);
             }         
@@ -28,7 +29,7 @@ and open the template in the editor.
                 return $result;
             }         
             function display() {
-                echo '<table cols="3" style="font-size:large; font-weight: bold">';
+                echo '<table cols="3" style="font-size=large"; font-weight="bold">';
                 echo '<tr>'; // open the first row
                 for($pos=0; $pos<9;$pos++) {
                     echo $this->show_cell($pos);
@@ -54,6 +55,7 @@ and open the template in the editor.
         }
         $game = new Game($squares);
         $game->display();
+
         if($game->winner('x')) {
             echo 'You win. Lucky guesses!';
         } else if ($game->winner('o')) {
