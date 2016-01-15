@@ -72,13 +72,14 @@ and open the template in the editor.
                     }
                     $this->newposition = $this->position;
                     $this->newposition[$which] = 'x';
-                    $move = implode($this->newposition);
-                    var_dump($move);
-                    $link ='/?board='.$this->aimove($move);
+                    $move = $this->newposition;
+                    //var_dump($move);
+                    $link ='/4711lab/?board='.$this->aimove($move);
                     //var_dump($link);
                     return '<td><a href="'.$link.'">-</a></td>';
                 }
                 
+                //looks for next -, replaces with o
                 function aimove() {
                     $this->newnewposition = $this->newposition;
                     for($pos=0;$pos<9;$pos++) {
@@ -97,9 +98,11 @@ and open the template in the editor.
             $game->display();
 
             if($game->winner('x')) {
-                echo '[x] You win. Lucky guesses!';
+                echo '[x] You win. Lucky guesses!<br>';
+                echo '<a href="/4711lab/?board=---------">replay?</a>';
             } else if ($game->winner('o')) {
-                echo '[o] I win. Muahahaha';
+                echo '[o] I win. Muahahaha<br>';
+                echo '<a href="/4711lab/?board=---------">replay?</a>';
             } else {
                 echo 'No winner yet.';
             }
