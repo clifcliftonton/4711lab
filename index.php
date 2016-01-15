@@ -43,7 +43,7 @@ and open the template in the editor.
             function show_cell($which) {
                 $token = $this->position[$which];
                 //deal with the easy case
-                if($token <> '-') {
+                if($token != '-') {
                     return '<td>'.$token.'</td>';
                 }
                 $this->newposition = $this->position;
@@ -53,6 +53,10 @@ and open the template in the editor.
                 return '<td><a href="'.$link.'">-</a></td>';
             }
         }
+        
+        //main
+        $squares = filter_input(INPUT_GET, 'board');
+        var_dump($squares);
         $game = new Game($squares);
         $game->display();
 
